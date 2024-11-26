@@ -93,150 +93,96 @@
             </div>
         </div>
     </div>
-
     <script>
-       // Função para alterar o nome  
+        // Função para alterar o nome do perfil
         function alterarNome() {
-        // Solicita ao usuário um novo nome por meio de um prompt
+            // Solicita ao usuário que digite um novo nome
             const novoNome = prompt("Digite o novo nome:");
-        // Se o usuário digitou algo, o nome exibido é alterado
+            // Verifica se o usuário digitou algo e, se sim, altera o texto do nome exibido
             if (novoNome) {
-        // Atualiza o texto do id "profileName" para o novo nome
                 document.getElementById("profileName").textContent = "Nome: " + novoNome;
             }
         }
-        // Função para abrir a seleção de imagem
+    
+        // Função para abrir o seletor de arquivos para alterar a foto de perfil
         function abrirSelecaoDeImagem() {
-        // Simula um clique no campo de entrada de arquivo, fazendo a janela de seleção de imagem aparecer
+            // Simula o clique no input de tipo file para abrir a seleção de imagem
             document.getElementById("fileInput").click();
         }
-        // Função para alterar a imagem do perfil
+    
+        // Função para alterar a imagem de perfil com o arquivo selecionado
         function alterarImagem() {
-       // Obtém o campo de entrada de arquivo com id "fileInput"
+            // Obtém o input de arquivo e o primeiro arquivo selecionado
             const fileInput = document.getElementById("fileInput");
-        // Pega o primeiro arquivo selecionado pelo usuário
-                const file = fileInput.files[0];
-       // Se um arquivo foi selecionado, cria uma instância de FileReader para ler o arquiv
+            const file = fileInput.files[0];
+    
+            // Verifica se um arquivo foi selecionado
             if (file) {
-         // Define o que deve acontecer quando o arquivo for lido
+                // Cria um novo FileReader para ler o arquivo selecionado
                 const reader = new FileReader();
-           // Atualiza o "src" da imagem com id "profileImage" para o arquivo carregado
                 reader.onload = function(e) {
-        // Inicia a leitura do arquivo como uma URL de dados  
-            document.getElementById("profileImage").src = e.target.result;
+                    // Altera a imagem de perfil para o novo arquivo selecionado
+                    document.getElementById("profileImage").src = e.target.result;
                 };
-                // Inicia a leitura do arquivo como uma URL de dados (base64)
+                // Lê o arquivo selecionado como uma URL de dados (base64)
                 reader.readAsDataURL(file);
             }
         }
+    
         // Função para adicionar a idade ao perfil
         function adicionarIdade() {
-           // Solicita ao usuário que digite a idade
+            // Solicita ao usuário que digite a idade
             const novaIdade = prompt("Digite a sua idade:");
-           // Se o usuário digitou um valor e esse valor é um número válido
+            // Verifica se a idade é válida (um número)
             if (novaIdade && !isNaN(novaIdade)) {
-               // Atualiza o texto do elemento com id "profileAge" para a nova idade
+                // Altera o texto da idade exibida no perfil
                 document.getElementById("profileAge").textContent = "Idade: " + novaIdade;
-                  // Exibe um alerta caso o valor não seja um número válido
-                  } else {
+            } else {
+                // Caso o valor não seja um número válido, exibe um alerta
                 alert("Por favor, digite um número válido para a idade.");
             }
         }
+    
         // Função para adicionar um novo hobby à lista
         function adicionarHobby() {
             // Solicita ao usuário que digite um novo hobby
             const novoHobby = prompt("Digite um novo hobby:");
-          // Se o usuário digitou algo, cria um novo elemento <li> para o hobby
+            // Verifica se o usuário digitou algo
             if (novoHobby) {
-            
+                // Cria um novo item de lista (li) para o hobby
                 const li = document.createElement("li");
-                li.textContent = novoHobby;
-                li.className = "list-group-item";
-                li.onclick = function() { excluirHobby(li); };
+                li.textContent = novoHobby; // Define o texto do item da lista
+                li.className = "list-group-item"; // Adiciona a classe para o estilo
+                li.onclick = function() { excluirHobby(li); }; // Adiciona um evento de clique para excluir o hobby
+                // Adiciona o novo item de hobby à lista de hobbies no perfil
                 document.getElementById("hobbiesList").appendChild(li);
             }
         }
-
+    
+        // Função para excluir um hobby individualmente
         function excluirHobby(item) {
+            // Remove o item de hobby do DOM
             item.remove();
         }
-
+    
+        // Função para excluir todos os hobbies da lista
         function excluirTodosHobbies() {
+            // Obtém a lista de hobbies
             const hobbiesList = document.getElementById("hobbiesList");
-            hobbiesList.innerHTML = ""; // Remove todos os itens da lista
+            // Limpa o conteúdo da lista (remove todos os itens)
+            hobbiesList.innerHTML = "";
         }
-        // função para alterar a cor de fundo
+    
+        // Função para mudar a cor de fundo do card de perfil
         function mudarCorDeFundo() {
+            // Define um array com algumas cores de fundo
             const cores = ["#f8d7da", "#d1ecf1", "#d4edda", "#ffb3cd", "#cce5ff"];
+            // Escolhe uma cor aleatória do array
             const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+            // Aplica a cor aleatória ao fundo do card de perfil
             document.getElementById("profileCard").style.backgroundColor = corAleatoria;
         }
     </script>
-</body>
-</html>
-
-    <script>
-        
-        function alterarNome() {
-            const novoNome = prompt("Digite o novo nome:");
-            if (novoNome) {
-                document.getElementById("profileName").textContent = "Nome: " + novoNome;
-            }
-        }
-
-        function abrirSelecaoDeImagem() {
-            document.getElementById("fileInput").click();
-        }
-
-        function alterarImagem() {
-            const fileInput = document.getElementById("fileInput");
-            const file = fileInput.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById("profileImage").src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function adicionarIdade() {
-            const novaIdade = prompt("Digite a sua idade:");
-            if (novaIdade && !isNaN(novaIdade)) {
-                document.getElementById("profileAge").textContent = "Idade: " + novaIdade;
-            } else {
-                alert("Por favor, digite um número válido para a idade.");
-            }
-        }
-
-        function adicionarHobby() {
-            const novoHobby = prompt("Digite um novo hobby:");
-            if (novoHobby) {
-                const li = document.createElement("li");
-                li.textContent = novoHobby;
-                li.className = "list-group-item";
-                li.onclick = function() { excluirHobby(li); };
-                document.getElementById("hobbiesList").appendChild(li);
-            }
-        }
-
-        function excluirHobby(item) {
-            item.remove();
-        }
-
-        function excluirTodosHobbies() {
-            const hobbiesList = document.getElementById("hobbiesList");
-            hobbiesList.innerHTML = ""; // Remove todos os itens da lista
-        }
-        // função para alterar a cor de fundo
-        function mudarCorDeFundo() {
-           
-            const cores = ["#f8d7da", "#d1ecf1", "#d4edda", "#ffb3cd", "#cce5ff"];
-            const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-            // Altera a cor de fundo do elemento com id "profileCard"
-            document.getElementById("profileCard").style.backgroundColor = corAleatoria;
-        }
-    </script>
+    
 </body>
 </html>
